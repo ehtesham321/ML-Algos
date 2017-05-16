@@ -43,7 +43,6 @@ def getlabel(point):
 	min_label = 100
 	count = 0
 	for i in sampleArray:
-		#dist = L1Distance(point[:,[1, 2, 3]],i[:,[0, 1, 2]])
 		dist = L1Distance([point[1],point[2],point[3]],[i[0],i[1],i[2]])
 		if dist < min_dist:
 			min_dist = dist
@@ -55,14 +54,12 @@ def getlabel(point):
 data = np.genfromtxt('3D_spatial_network.txt', delimiter=',')
 
 #data = np.genfromtxt('3D_spatial_network.txt', delimiter=',',skip_header=1)
-#travian = np.delete(data, np.s_[::1], 1)
+
 sample = random.sample(data[:, [1, 2, 3]],int(2*math.ceil(math.sqrt(len(data)))))
 
 X = np.asarray(sample)
 
-#kmeans = KMeans(n_clusters)
-
-kmeans = KMeans(n_clusters,n_init = 2)
+kmeans = KMeans(n_clusters)
 kmeans.fit(X)
 
 kmedian = KMedian(n_clusters)
